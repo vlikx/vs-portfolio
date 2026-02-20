@@ -5,7 +5,7 @@ const BOXES = 10;
 const PLACEHOLDER = '[LOCKED_DATA]';
 let hoverHintShown = false;
 
-export default function SkillBlockBar({ skill, index }) {
+export default function SkillBlockBar({ skill, index, groupStart }) {
   const [revealed, setRevealed] = React.useState(false);
   const [showHint, setShowHint] = React.useState(false);
   const ref = React.useRef();
@@ -44,7 +44,7 @@ export default function SkillBlockBar({ skill, index }) {
   }
 
   return (
-    <div className="relative">
+    <div className={"relative" + (groupStart ? " mt-4 md:mt-6" : "") }>
       {/* Scroll Indicator (Hero style) */}
       {index === 0 && (
         <motion.div
@@ -61,7 +61,7 @@ export default function SkillBlockBar({ skill, index }) {
             <span className="text-[10px] uppercase tracking-[0.3em] text-white/30 rotate-90 origin-center mb-6">
               HOVER
             </span>
-            <div className="h-8 w-px bg-gradient-to-t from-white/30 to-transparent" />
+            <div className="h-8 w-px bg-linear-to-t from-white/30 to-transparent" />
           </motion.div>
         </motion.div>
       )}

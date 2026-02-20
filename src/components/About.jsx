@@ -11,19 +11,38 @@ const infoData = [
 ];
 
 const skills = [
-  { name: 'Adobe Photoshop', description: 'Image editing, compositing, retouching', level: 95, type: 'advanced' },
-  { name: 'Adobe InDesign', description: 'Layout design, editorial, publications', level: 92, type: 'advanced' },
-  { name: 'Adobe Illustrator', description: 'Vector graphics, branding, icons', level: 90, type: 'advanced' },
-  { name: 'Print & Packaging', description: 'Print-ready files & prepress production (flexographic printing & digital printing)', level: 88, type: 'advanced' },
-  { name: 'Creating Presentations', description: 'Conferences, projects & explanation of solutions', level: 85, type: 'advanced' },
-  { name: 'Autodesk Maya', description: '3D modeling, animation & rendering', level: 80, type: 'advanced' },
-  { name: 'After Effects', description: 'Motion graphics & animation', level: 70, type: 'basic' },
-  { name: 'Adobe Premiere', description: 'Video editing & post-production', level: 68, type: 'basic' },
-  { name: 'Prototyping', description: 'Interactive prototypes with Code (Vibe Coding) & Figma', level: 65, type: 'basic' },
-  { name: 'User Research', description: 'User interviews, surveys, usability testing', level: 60, type: 'basic' },
-  { name: 'Photography', description: 'Weddings, Birthdays & Events', level: 58, type: 'basic' },
-  { name: 'Analog Films', description: 'Processing & Digitizing', level: 55, type: 'basic' },
-  { name: 'Blender', description: '3D modeling, animation & rendering', level: 50, type: 'basic' },
+  // Design & Creative
+  { name: 'Adobe Photoshop', description: 'Image editing, compositing, retouching', level: 95, category: 'Design & Creative' },
+  { name: 'Adobe InDesign', description: 'Layout design, editorial, publications', level: 92, category: 'Design & Creative' },
+  { name: 'Adobe Illustrator', description: 'Vector graphics, branding, icons', level: 90, category: 'Design & Creative' },
+  { name: 'Print & Packaging', description: 'Print-ready files & prepress production (flexographic printing & digital printing)', level: 88, category: 'Design & Creative' },
+  { name: 'Creating Presentations', description: 'Conferences, projects & explanation of solutions', level: 85, category: 'Design & Creative' },
+  { name: 'Photography', description: 'Weddings, Birthdays & Events', level: 58, category: 'Design & Creative' },
+  { name: 'Analog Films', description: 'Processing & Digitizing', level: 55, category: 'Design & Creative' },
+  // 3D & Motion
+  { name: 'Autodesk Maya', description: '3D modeling, animation & rendering', level: 80, category: '3D & Motion' },
+  { name: 'Blender', description: '3D modeling, animation & rendering', level: 50, category: '3D & Motion' },
+  { name: 'After Effects', description: 'Motion graphics & animation', level: 70, category: '3D & Motion' },
+  { name: 'Adobe Premiere', description: 'Video editing & post-production', level: 68, category: '3D & Motion' },
+  // UX & Research
+  { name: 'Prototyping', description: 'Interactive prototypes with Code (Vibe Coding) & Figma', level: 65, category: 'UX & Research' },
+  { name: 'User Research', description: 'User interviews, surveys, usability testing', level: 60, category: 'UX & Research' },
+];
+
+// Group skills by thematic category for clustering
+const skillGroups = [
+  {
+    label: 'Design & Creative',
+    skills: skills.filter((s) => s.category === 'Design & Creative'),
+  },
+  {
+    label: '3D & Motion',
+    skills: skills.filter((s) => s.category === '3D & Motion'),
+  },
+  {
+    label: 'UX & Research',
+    skills: skills.filter((s) => s.category === 'UX & Research'),
+  },
 ];
 
 // Flicker animation variants
@@ -166,10 +185,29 @@ export default function About() {
           ))}
         </div>
 
-        {/* Skills - Technical Dashboard Grid */}
+        {/* Skills - Technical Dashboard Grid, visually clustered by group */}
         <div className="grid gap-2 md:grid-cols-2">
-          {skills.map((skill, index) => (
-            <SkillBlockBar key={skill.name} skill={skill} index={index} />
+          {skillGroups.map((group, groupIdx) => (
+            <div
+              key={group.label}
+              className={
+                groupIdx > 0
+                  ? 'mt-12 md:col-span-2 border-t border-white/10 pt-8'
+                  : 'md:col-span-2'
+              }
+            >
+              <div className="mb-2 ml-1 text-xs font-bold uppercase tracking-widest text-accent/80 select-none">
+                {group.label}
+              </div>
+              {group.skills.map((skill, idx) => (
+                <SkillBlockBar
+                  key={skill.name}
+                  skill={skill}
+                  index={idx + skillGroups.slice(0, groupIdx).reduce((acc, g) => acc + g.skills.length, 0)}
+                  groupStart={idx === 0}
+                />
+              ))}
+            </div>
           ))}
         </div>
 
