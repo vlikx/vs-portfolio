@@ -206,8 +206,8 @@ const ParallaxCard = memo(function ParallaxCard({ project, index, onClick }) {
     );
 });
 
-// Memoized column offsets
-const columnOffsets = [0, 120, 60];
+// Memoized column offsets: left and right aligned, middle lower
+const columnOffsets = [0, 80, 0];
 
 export default function ProjectGrid() {
   const containerRef = useRef(null);
