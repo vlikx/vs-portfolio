@@ -267,11 +267,11 @@ export default function ProjectGrid() {
             </p>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {columns.map((column, colIndex) => (
               <div
                 key={colIndex}
-                className="flex flex-col gap-3 md:gap-4"
+                className="flex flex-col gap-4"
                 style={{ marginTop: columnOffsets[colIndex] }}
               >
                 {column.map((project, i) => (
