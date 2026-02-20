@@ -116,7 +116,7 @@ const ParallaxCard = memo(function ParallaxCard({ project, index, onClick }) {
                 <>
                   {/* Show cover.png only when not showing GIF */}
                   <img
-                    src={new URL('../assets/projects/Wedding Flyer/Wedding Flyer Cover.png', import.meta.url).href}
+                    src={new URL('../assets/projects/Wedding Flyer/Wedding Fyler Cover.png', import.meta.url).href}
                     alt="Wedding Flyer Cover"
                     className={`absolute transition-all duration-500 z-10 ${showWeddingGif ? 'opacity-0' : 'opacity-100'}`}
                     style={{
