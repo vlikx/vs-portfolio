@@ -1,22 +1,31 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import PortraitVS from '../assets/Portrait_VS.jpg';
 
 const infoData = [
-  { label: 'FOCUS', value: 'STUDY // UX' },
-  { label: 'TIMELINE', value: '2018 — PRESENT' },
+  { label: 'FOCUS', value: 'UX STUDY // COLLECTING EXPERIENCE' },
+  { label: 'EXPERIENCE', value: '5+' },
   { label: 'LOCATION', value: 'DE // REMOTE' },
-  { label: 'MINDSET', value: 'VISION + VALUE' },
+  { label: 'PLATFORMS', value: 'MAC + WINDOWS' },
 ];
 
 const skills = {
   advanced: [
-    { name: 'Adobe Creative Suite', description: 'Photoshop, Illustrator, InDesign, After Effects' },
-    { name: 'Substance 3D', description: 'Texturing & Material Design' },
-    { name: 'Autodesk Maya', description: '3D Modeling & Animation' },
+    { name: 'Adobe Photoshop', description: 'Image editing, compositing, retouching' },
+    { name: 'Adobe InDesign', description: 'Layout design, editorial, publications' },
+    { name: 'Adobe Illustrator', description: 'Vector graphics, branding, icons' },
+    { name: 'Print & Packaging', description: 'Print-ready files & prepress production (flexographic printing & digital printing)' },
+    { name: 'Creating Presentations', description: 'Conferences, projects & explanation of solutions' },
+    { name: 'Autodesk Maya', description: '3D modeling, animation & rendering' }
   ],
-  intermediate: [
-    { name: 'Unreal Engine', description: 'Real-time 3D & Visualization' },
-    { name: 'Figma', description: 'UI/UX Design & Prototyping' },
-    { name: 'Photography', description: 'Product & Lifestyle' },
+  basics: [
+    { name: 'After Effects', description: 'Motion graphics & animation' },
+    { name: 'Adobe Premiere', description: 'Video editing & post-production' },
+    { name: 'Prototyping', description: 'Interactive prototypes with Code (Vibe Coding) & Figma' },
+    { name: 'User Research', description: 'User interviews, surveys, usability testing' },
+    { name: 'Photography', description: 'Weddings, Birthdays & Events' },
+    { name: 'Analog Films', description: 'Processing & Digitizing' },
+    { name: 'Blender', description: '3D modeling, animation & rendering' },
   ],
 };
 
@@ -41,6 +50,7 @@ const fadeInUp = {
 };
 
 export default function About() {
+  const [showPortraitModal, setShowPortraitModal] = useState(false);
   return (
     <section id="about" className="relative px-6 py-32 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
@@ -51,24 +61,86 @@ export default function About() {
           whileInView="visible"
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-16"
+          className="mb-6"
         >
           <span className="text-xs uppercase tracking-[0.3em] text-white/40">
             // STATUS
           </span>
         </motion.div>
-
-        {/* Tagline */}
+        {/* Portrait Frame left aligned, clickable for fullscreen */}
+        <div className="mb-6 flex justify-start items-center gap-4">
+          <div className="relative rounded-full border-2 border-white/10 bg-gradient-to-br from-black via-black/60 to-accent/30 shadow-xl overflow-hidden w-28 h-28 flex items-center justify-center cursor-pointer group" onClick={() => setShowPortraitModal(true)}>
+            <img
+              src={PortraitVS}
+              alt="Viktor Stang Portrait"
+              className="object-cover w-full h-full rounded-full shadow-md border border-white/10 group-hover:scale-105 transition-transform duration-300"
+              style={{ boxShadow: '0 4px 16px 0 rgba(0,0,0,0.25)' }}
+            />
+            {/* Accent border overlay */}
+            <div className="pointer-events-none absolute inset-0 rounded-full border-2 border-accent/40 opacity-60" />
+            {/* Subtle noise overlay */}
+            <div className="pointer-events-none absolute inset-0 opacity-10 mix-blend-overlay" style={{ backgroundImage: 'url(\"data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E\")' }} />
+          </div>
+          {/* Click hint to the right, horizontal with line in front, animated like scroll hint */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 0.8 }}
+            className="flex flex-row items-center ml-2 select-none gap-2"
+          >
+            <motion.div
+              animate={{ x: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="flex flex-row items-center"
+            >
+              <div className="w-16 h-px bg-gradient-to-r from-white/30 to-transparent"></div>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">Click</span>
+            </motion.div>
+          </motion.div>
+        </div>
+        {/* Name below portrait, left aligned */}
         <motion.h2
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-16 text-2xl font-bold uppercase tracking-tight text-white md:text-4xl"
+          className="mb-16 text-2xl font-bold uppercase tracking-tight text-white md:text-4xl text-left"
         >
           VIKTOR STANG
         </motion.h2>
-
+        {/* Portrait Modal */}
+        {showPortraitModal && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.7 }}
+            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
+            onClick={() => setShowPortraitModal(false)}
+          >
+            <div className="relative flex items-center justify-center">
+              <div className="aspect-square w-[min(80vw,80vh)] max-w-lg flex items-center justify-center">
+                <div className="w-full h-full rounded-full overflow-hidden items-center justify-center bg-black">
+                  <img
+                    src={PortraitVS}
+                    alt="Viktor Stang Portrait Fullscreen"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {/* Close Button - same style as modal */}
+                <button
+                  className="absolute top-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-black/50 text-white/60 transition-all hover:border-white/40 hover:text-white hover:scale-110"
+                  onClick={e => { e.stopPropagation(); setShowPortraitModal(false); }}
+                  aria-label="Close"
+                >
+                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
         {/* Info Grid - Technical Readout */}
         <div className="mb-24 grid grid-cols-2 gap-px bg-white/10 md:grid-cols-4">
           {infoData.map((item, i) => (
@@ -90,29 +162,6 @@ export default function About() {
             </motion.div>
           ))}
         </div>
-
-        {/* Stats Bar - Integrated with Info Grid */}
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-24 flex items-center justify-between border-t border-b border-white/10 py-8"
-        >
-          <div>
-            <span className="text-4xl font-bold text-white md:text-5xl">7+</span>
-            <p className="mt-1 text-[10px] uppercase tracking-[0.3em] text-white/40">Years Active</p>
-          </div>
-          <div className="text-center">
-            <span className="text-4xl font-bold text-white md:text-5xl">3</span>
-            <p className="mt-1 text-[10px] uppercase tracking-[0.3em] text-white/40">Disciplines</p>
-          </div>
-          <div className="text-right">
-            <span className="text-4xl font-bold text-accent md:text-5xl">∞</span>
-            <p className="mt-1 text-[10px] uppercase tracking-[0.3em] text-white/40">Possibilities</p>
-          </div>
-        </motion.div>
 
         {/* Skills - Two Column Grid */}
         <div className="grid gap-12 md:grid-cols-2">
@@ -152,7 +201,7 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Intermediate Skills */}
+          {/* Basics */}
           <motion.div
             variants={fadeInUp}
             initial="hidden"
@@ -162,15 +211,15 @@ export default function About() {
           >
             <div className="mb-6 flex items-center gap-3">
               <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 text-xs font-bold text-white/40">
-                I
+                B
               </span>
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">
-                Intermediate
+                Basics
               </span>
             </div>
 
             <div className="space-y-0">
-              {skills.intermediate.map((skill, index) => (
+              {skills.basics.map((skill, index) => (
                 <motion.div
                   key={skill.name}
                   initial={{ opacity: 0, x: -20 }}

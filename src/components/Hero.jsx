@@ -46,10 +46,10 @@ export default function Hero() {
         >
           <motion.h1
             initial={{ x: '-100%' }}
-            animate={{ x: 0 }}
-            transition={{ duration: 1.2, ease: 'linear' }}
+            animate={{ x: ['-100%', '0%', '2vw'] }}
+            transition={{ times: [0, 0.7, 1], duration: 2.2, ease: [0.7, 0.2, 0.1, 1] }}
             className="text-[18vw] font-black leading-[0.85] tracking-tighter whitespace-nowrap select-none will-change-transform"
-            style={{ marginLeft: '-3vw', willChange: 'transform' }}
+            style={{ marginLeft: '3vw', willChange: 'transform' }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -66,10 +66,10 @@ export default function Hero() {
 
           <motion.h1
             initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            transition={{ duration: 1.2, delay: 0.1, ease: 'linear' }}
+            animate={{ x: ['100%', '0%', '-2vw'] }}
+            transition={{ times: [0, 0.7, 1], duration: 2.2, delay: 0.1, ease: [0.7, 0.2, 0.1, 1] }}
             className="text-[18vw] font-black leading-[0.85] tracking-tighter whitespace-nowrap select-none text-right will-change-transform"
-            style={{ marginRight: '-3vw', willChange: 'transform' }}
+            style={{ marginRight: '4vw', willChange: 'transform' }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
@@ -121,7 +121,7 @@ export default function Hero() {
           className="absolute bottom-32 left-0 right-0 overflow-hidden will-change-transform"
         >
           <motion.div
-            className="flex whitespace-nowrap will-change-transform"
+            className="flex whitespace-nowrap will-change-transform justify-center"
             animate={{ x: ['0%', '-50%'] }}
             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
             style={{ willChange: 'transform' }}
@@ -129,7 +129,7 @@ export default function Hero() {
             {tickerItems.map((_, i) => (
               <span
                 key={i}
-                className="mx-6 text-[10vw] font-black uppercase tracking-tight text-white/[0.02] select-none"
+                className="mx-6 text-[10vw] font-black uppercase tracking-tight text-white/[0.02] select-none text-center"
               >
                 3D VISUALIZATION • UX DESIGN • DIGITAL MEDIA •
               </span>

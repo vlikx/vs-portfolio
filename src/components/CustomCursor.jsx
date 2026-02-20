@@ -129,13 +129,18 @@ const CustomCursor = memo(function CustomCursor() {
         }}
       >
         <motion.div
-          className="rounded-full border border-white/30 will-change-transform"
+          className="rounded-full will-change-transform"
           animate={{
-            width: isHovering ? 140 : isPointer ? 50 : 40,
-            height: isHovering ? 140 : isPointer ? 50 : 40,
-            x: isHovering ? -70 : isPointer ? -25 : -20,
-            y: isHovering ? -70 : isPointer ? -25 : -20,
-            borderColor: isHovering ? 'rgba(0, 212, 255, 0.5)' : 'rgba(255, 255, 255, 0.2)',
+            width: isHovering ? 150 : isPointer ? 50 : 40,
+            height: isHovering ? 150 : isPointer ? 50 : 40,
+            x: isHovering ? -75 : isPointer ? -25 : -20,
+            y: isHovering ? -75 : isPointer ? -25 : -20,
+            boxShadow: isHovering
+              ? '0 0 0 4px rgba(0,212,255,0.7), 0 0 32px 8px rgba(0,212,255,0.25)'
+              : 'none',
+            border: isHovering
+              ? '3px solid rgba(0,212,255,0.85)'
+              : '1px solid rgba(255,255,255,0.2)',
           }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         />

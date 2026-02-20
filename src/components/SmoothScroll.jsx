@@ -15,6 +15,9 @@ const SmoothScroll = memo(function SmoothScroll({ children }) {
 
     lenisRef.current = lenis;
 
+    // Expose lenis instance globally for modal control
+    window.lenis = lenis;
+
     function raf(time) {
       lenis.raf(time);
       rafIdRef.current = requestAnimationFrame(raf);
@@ -27,6 +30,7 @@ const SmoothScroll = memo(function SmoothScroll({ children }) {
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current);
       }
+      window.lenis = null;
       lenis.destroy();
     };
   }, []);

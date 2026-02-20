@@ -28,7 +28,7 @@ function App() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-xs uppercase tracking-[0.3em] text-white/40">
-              Contact
+              // Contact
             </span>
             <h2 className="mt-4 text-[clamp(2.5rem,8vw,6rem)] font-bold leading-none tracking-tighter">
               LET'S CREATE
