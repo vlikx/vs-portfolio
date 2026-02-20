@@ -148,7 +148,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
           >
             {/* Hero Image Section */}
             <div
-              className="relative h-[75vh] w-full overflow-hidden"
+              className="relative h-[75vh] w-full overflow-hidden bg-neutral-900"
             >
 
               {/* Current Image (z-10) */}
@@ -165,8 +165,9 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 style={{ boxShadow: 'none' }}
               />
 
-              {/* Background Gradient (z-0) */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-40 z-0`} />
+              {/* Solid Black Background */}
+              <div className="absolute inset-0 bg-black z-0" />
+              {/* Removed gradient overlay for solid black background */}
 
               {/* Loading indicator */}
               {!imageLoaded && (
@@ -178,8 +179,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 </div>
               )}
 
-              {/* Gradient Overlay Bottom */}
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent" />
+              {/* Remove extra overlay for a clean, consistent look */}
 
               {/* Navigation Arrows and Image Counter removed for cleaner look */}
             </div>

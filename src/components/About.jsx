@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import SkillBlockBar from './SkillBlockBar';
 import PortraitVS from '../assets/Portrait_VS.jpg';
 
 const infoData = [
@@ -9,25 +10,21 @@ const infoData = [
   { label: 'PLATFORMS', value: 'MAC + WINDOWS' },
 ];
 
-const skills = {
-  advanced: [
-    { name: 'Adobe Photoshop', description: 'Image editing, compositing, retouching' },
-    { name: 'Adobe InDesign', description: 'Layout design, editorial, publications' },
-    { name: 'Adobe Illustrator', description: 'Vector graphics, branding, icons' },
-    { name: 'Print & Packaging', description: 'Print-ready files & prepress production (flexographic printing & digital printing)' },
-    { name: 'Creating Presentations', description: 'Conferences, projects & explanation of solutions' },
-    { name: 'Autodesk Maya', description: '3D modeling, animation & rendering' }
-  ],
-  basics: [
-    { name: 'After Effects', description: 'Motion graphics & animation' },
-    { name: 'Adobe Premiere', description: 'Video editing & post-production' },
-    { name: 'Prototyping', description: 'Interactive prototypes with Code (Vibe Coding) & Figma' },
-    { name: 'User Research', description: 'User interviews, surveys, usability testing' },
-    { name: 'Photography', description: 'Weddings, Birthdays & Events' },
-    { name: 'Analog Films', description: 'Processing & Digitizing' },
-    { name: 'Blender', description: '3D modeling, animation & rendering' },
-  ],
-};
+const skills = [
+  { name: 'Adobe Photoshop', description: 'Image editing, compositing, retouching', level: 95, type: 'advanced' },
+  { name: 'Adobe InDesign', description: 'Layout design, editorial, publications', level: 92, type: 'advanced' },
+  { name: 'Adobe Illustrator', description: 'Vector graphics, branding, icons', level: 90, type: 'advanced' },
+  { name: 'Print & Packaging', description: 'Print-ready files & prepress production (flexographic printing & digital printing)', level: 88, type: 'advanced' },
+  { name: 'Creating Presentations', description: 'Conferences, projects & explanation of solutions', level: 85, type: 'advanced' },
+  { name: 'Autodesk Maya', description: '3D modeling, animation & rendering', level: 80, type: 'advanced' },
+  { name: 'After Effects', description: 'Motion graphics & animation', level: 70, type: 'basic' },
+  { name: 'Adobe Premiere', description: 'Video editing & post-production', level: 68, type: 'basic' },
+  { name: 'Prototyping', description: 'Interactive prototypes with Code (Vibe Coding) & Figma', level: 65, type: 'basic' },
+  { name: 'User Research', description: 'User interviews, surveys, usability testing', level: 60, type: 'basic' },
+  { name: 'Photography', description: 'Weddings, Birthdays & Events', level: 58, type: 'basic' },
+  { name: 'Analog Films', description: 'Processing & Digitizing', level: 55, type: 'basic' },
+  { name: 'Blender', description: '3D modeling, animation & rendering', level: 50, type: 'basic' },
+];
 
 // Flicker animation variants
 const flickerIn = {
@@ -51,10 +48,12 @@ const fadeInUp = {
 
 export default function About() {
   const [showPortraitModal, setShowPortraitModal] = useState(false);
+
+  // ...existing code...
+
   return (
     <section id="about" className="relative px-6 py-32 md:px-12 lg:px-16">
       <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
         <motion.div
           variants={fadeInUp}
           initial="hidden"
@@ -69,7 +68,11 @@ export default function About() {
         </motion.div>
         {/* Portrait Frame left aligned, clickable for fullscreen */}
         <div className="mb-6 flex justify-start items-center gap-4">
-          <div className="relative rounded-full border-2 border-white/10 bg-gradient-to-br from-black via-black/60 to-accent/30 shadow-xl overflow-hidden w-28 h-28 flex items-center justify-center cursor-pointer group" onClick={() => setShowPortraitModal(true)}>
+          <div
+            className="relative rounded-full border-2 border-white/10 bg-linear-to-br from-black via-black/60 to-accent/30 shadow-xl overflow-hidden w-28 h-28 flex items-center justify-center cursor-pointer group"
+            data-cursor="project"
+            onClick={() => setShowPortraitModal(true)}
+          >
             <img
               src={PortraitVS}
               alt="Viktor Stang Portrait"
@@ -93,7 +96,7 @@ export default function About() {
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
               className="flex flex-row items-center"
             >
-              <div className="w-16 h-px bg-gradient-to-r from-white/30 to-transparent"></div>
+              <div className="w-16 h-px bg-linear-to-r from-white/30 to-transparent"></div>
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">Click</span>
             </motion.div>
           </motion.div>
@@ -163,80 +166,13 @@ export default function About() {
           ))}
         </div>
 
-        {/* Skills - Two Column Grid */}
-        <div className="grid gap-12 md:grid-cols-2">
-          {/* Advanced Skills */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="mb-6 flex items-center gap-3">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-accent text-xs font-bold text-black">
-                A
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">
-                Advanced
-              </span>
-            </div>
-
-            <div className="space-y-0">
-              {skills.advanced.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.4 }}
-                  className="group border-b border-white/5 py-4 transition-colors hover:border-white/20"
-                >
-                  <h3 className="font-mono text-sm uppercase tracking-wider text-white transition-colors group-hover:text-accent">
-                    {skill.name}
-                  </h3>
-                  <p className="mt-1 text-xs text-white/30">{skill.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Basics */}
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            <div className="mb-6 flex items-center gap-3">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 text-xs font-bold text-white/40">
-                B
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-white/40">
-                Basics
-              </span>
-            </div>
-
-            <div className="space-y-0">
-              {skills.basics.map((skill, index) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 + 0.2, duration: 0.4 }}
-                  className="group border-b border-white/5 py-4 transition-colors hover:border-white/20"
-                >
-                  <h3 className="font-mono text-sm uppercase tracking-wider text-white transition-colors group-hover:text-accent">
-                    {skill.name}
-                  </h3>
-                  <p className="mt-1 text-xs text-white/30">{skill.description}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+        {/* Skills - Technical Dashboard Grid */}
+        <div className="grid gap-2 md:grid-cols-2">
+          {skills.map((skill, index) => (
+            <SkillBlockBar key={skill.name} skill={skill} index={index} />
+          ))}
         </div>
+
       </div>
     </section>
   );
