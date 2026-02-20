@@ -328,7 +328,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                                       {section.title}
                                     </h3>
                                   )}
-                                  <div className="grid gap-0 md:grid-cols-2 lg:grid-cols-3">
+                                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                                     {section.items.map((item, iIdx) => (
                                       <div
                                         key={iIdx}
