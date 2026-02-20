@@ -267,7 +267,7 @@ export default function ProjectGrid() {
             </p>
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {columns.map((column, colIndex) => (
               <div
                 key={colIndex}
