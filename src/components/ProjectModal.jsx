@@ -170,8 +170,11 @@ export default function ProjectModal({ project, isOpen, onClose }) {
 
               {/* Loading indicator */}
               {!imageLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-10 w-10 animate-spin rounded-full border-2 border-white/20 border-t-white/60" />
+                <div className="absolute inset-0 flex items-center justify-center z-20">
+                  <svg className="animate-spin h-12 w-12 text-accent" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle className="opacity-20" cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="6" />
+                    <path d="M44 24c0-11.046-8.954-20-20-20" stroke="currentColor" strokeWidth="6" strokeLinecap="round" className="opacity-80" />
+                  </svg>
                 </div>
               )}
 
