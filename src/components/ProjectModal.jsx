@@ -2,13 +2,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useCallback, useEffect, useRef } from 'react';
 
 export default function ProjectModal({ project, isOpen, onClose }) {
+  // Early return if project is null to prevent errors and black screen
+  if (!project) return null;
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const autoplayRef = useRef();
+  const [randomOrder, setRandomOrder] = useState([]);
 
   // Early return if project is null to prevent errors
-  if (!project) return null;
+
 
 
   // Reset state when project changes
@@ -19,7 +23,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
   }, [project]);
 
   // Autoplay effect (disabled for Wedding Flyer)
-  const isWeddingFlyer = project.title && project.title.trim().toLowerCase().includes('wedding flyer');
+  const isWeddingFlyer = project && project.title && project.title.trim().toLowerCase().includes('wedding flyer');
   useEffect(() => {
     if (isWeddingFlyer) return;
     if (!isOpen || !project?.images?.length || project.images.length < 2 || isPaused) return;
@@ -68,7 +72,6 @@ export default function ProjectModal({ project, isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
-        const [randomOrder, setRandomOrder] = useState([]);
 
   const handleNext = useCallback(() => {
     if (project?.images?.length > 1) {
@@ -88,7 +91,6 @@ export default function ProjectModal({ project, isOpen, onClose }) {
 
   const handleImageLoad = useCallback(() => setImageLoaded(true), []);
 
-  if (!project) return null;
 
   // For Wedding Flyer, always show the GIF as the only image, no autoplay
   let hasMultipleImages = project.images?.length > 1;
@@ -164,7 +166,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
               />
 
               {/* Background Gradient (z-0) */}
-              <div className={`absolute inset-0 bg-linear-to-br ${project.color} opacity-40 z-0`} />
+              <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-40 z-0`} />
 
               {/* Loading indicator */}
               {!imageLoaded && (
@@ -174,7 +176,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
               )}
 
               {/* Gradient Overlay Bottom */}
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-black to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent" />
 
               {/* Navigation Arrows and Image Counter removed for cleaner look */}
             </div>

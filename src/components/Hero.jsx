@@ -121,7 +121,7 @@ export default function Hero() {
           className="absolute bottom-32 left-0 right-0 overflow-hidden will-change-transform"
         >
           <motion.div
-            className="flex whitespace-nowrap will-change-transform justify-center"
+            className="flex whitespace-nowrap will-change-transform"
             animate={{ x: ['0%', '-50%'] }}
             transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
             style={{ willChange: 'transform' }}
@@ -129,7 +129,7 @@ export default function Hero() {
             {tickerItems.map((_, i) => (
               <span
                 key={i}
-                className="mx-6 text-[10vw] font-black uppercase tracking-tight text-white/[0.02] select-none text-center"
+                className="mx-6 text-[10vw] font-black uppercase tracking-tight text-white/2 select-none"
               >
                 3D VISUALIZATION • UX DESIGN • DIGITAL MEDIA •
               </span>
@@ -167,7 +167,7 @@ export default function Hero() {
           <span className="text-[10px] uppercase tracking-[0.3em] text-white/30 rotate-90 origin-center mb-8">
             Scroll
           </span>
-          <div className="h-16 w-px bg-gradient-to-b from-white/30 to-transparent" />
+          <div className="h-16 w-px bg-linear-to-b from-white/30 to-transparent" />
         </motion.div>
       </motion.div>
     </section>

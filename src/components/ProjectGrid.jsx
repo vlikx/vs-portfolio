@@ -102,7 +102,7 @@ const ParallaxCard = memo(function ParallaxCard({ project, index, onClick }) {
                      hover:border-white/20`}
         >
           {/* Background Gradient */}
-          <div className={`absolute inset-0 bg-linear-to-br ${project.color}`}> 
+          <div className={`absolute inset-0 bg-gradient-to-br ${project.color}`}> 
             {/* Placeholder letter */}
             <div className="absolute inset-0 flex items-center justify-center">
               <span className="text-[10rem] md:text-[15rem] font-black text-white/3 select-none leading-none">
@@ -184,7 +184,7 @@ const ParallaxCard = memo(function ParallaxCard({ project, index, onClick }) {
             </div>
 
             {/* Overlay */}
-            <div className="absolute inset-0 bg-linear-to-t from-black via-black/30 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-500" />
 
             {/* Noise texture */}
             <div className="absolute inset-0 opacity-30 mix-blend-overlay" 
