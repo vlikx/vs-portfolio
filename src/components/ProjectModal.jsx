@@ -95,6 +95,8 @@ export default function ProjectModal({ project, isOpen, onClose }) {
   // For Wedding Flyer, always show the GIF as the only image, no autoplay
   let hasMultipleImages = project.images?.length > 1;
   let currentImage = project.images?.[currentImageIndex] || project.image;
+  // Special sizing for Naturrausch Website
+  const isNaturrausch = project && project.title && project.title.trim().toLowerCase().includes('naturrausch');
   if (isWeddingFlyer) {
     // Use Vite static import for GIF
     const gifModules = import.meta.glob('/src/assets/projects/Wedding Flyer/01_compressed.gif', { eager: true, import: 'default' });
@@ -148,7 +150,10 @@ export default function ProjectModal({ project, isOpen, onClose }) {
           >
             {/* Hero Image Section */}
             <div
-              className="relative h-[75vh] w-full overflow-hidden bg-neutral-900"
+              className={
+                `relative w-full overflow-hidden bg-neutral-900 ` +
+                (isNaturrausch ? 'h-[90vh] md:h-[95vh]' : 'h-[75vh]')
+              }
             >
 
               {/* Current Image (z-10) */}
@@ -161,7 +166,9 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 exit={{ opacity: 0, scale: 1.05 }}
                 transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 onLoad={handleImageLoad}
-                className="h-[60vh] w-full object-contain mt-10 relative z-10"
+                className={
+                  (isNaturrausch ? 'h-[80vh] md:h-[90vh] w-full object-contain mt-10 relative z-10' : 'h-[60vh] w-full object-contain mt-10 relative z-10')
+                }
                 style={{ boxShadow: 'none' }}
               />
 
@@ -351,6 +358,28 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                                   </div>
                                 </motion.div>
                               ))}
+                              {/* Place hyperlink at the bottom for Naturrausch Website */}
+                              {isNaturrausch && (
+                                <div className="mt-12 flex flex-row items-center justify-center gap-6">
+                                  <a
+                                    href="https://naturrausch.vercel.app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-mono text-accent underline underline-offset-4 hover:text-accent/80 transition-colors text-lg"
+                                    data-cursor="project"
+                                  >
+                                    naturrausch.vercel.app
+                                  </a>
+                                  <motion.div
+                                    animate={{ x: [0, 10, 0] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                                    className="flex flex-row items-center"
+                                  >
+                                    <div className="w-16 h-px bg-linear-to-r from-white/30 to-transparent"></div>
+                                    <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">Click</span>
+                                  </motion.div>
+                                </div>
+                              )}
                             </div>
                           </>
                         );

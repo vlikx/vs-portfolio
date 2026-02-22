@@ -1,0 +1,8 @@
+Project: NATURRAUSCH – Responsive UX Redesign
+
+Software Prototyping: University Project
+
+- The Vision: Bridging the gap between emotional outdoor storytelling and functional technical data.
+- UX Strategy: Prioritizing intuitive navigation and clear information hierarchy to simplify complex tour details.
+- Responsive Engineering: A "Mobile-First" approach ensuring seamless usability from desktop planning to on-trail mobile access.
+- Tech Stack: Built with React/Vite and deployed via Vercel to demonstrate production-ready "Vibe Coding" and performance.

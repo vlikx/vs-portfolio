@@ -65,6 +65,8 @@ const ParallaxCard = memo(function ParallaxCard({ project, index, onClick }) {
   const displayImage = project.images && project.images.length > 0
     ? project.images[currentImageIdx]
     : project.image;
+  // Special sizing for Naturrausch Website
+  const isNaturrausch = project.title.trim().toLowerCase().includes('naturrausch');
     return (
       <motion.article
         ref={ref}
@@ -103,12 +105,14 @@ const ParallaxCard = memo(function ParallaxCard({ project, index, onClick }) {
         >
           {/* Neutral Background Gradient */}
           <div className="absolute inset-0 bg-linear-to-br from-neutral-800 via-neutral-900 to-neutral-950"> 
-            {/* Placeholder letter */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-[10rem] md:text-[15rem] font-black text-white/3 select-none leading-none">
-                {project.title.charAt(0)}
-              </span>
-            </div>
+            {/* Placeholder letter, but hide for Wedding Flyer GIF */}
+            {!isWeddingFlyer && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-[10rem] md:text-[15rem] font-black text-white/3 select-none leading-none">
+                  {project.title.charAt(0)}
+                </span>
+              </div>
+            )}
 
             {/* Image */}
             <div className="absolute inset-0 flex items-center justify-center p-4">
@@ -158,8 +162,11 @@ const ParallaxCard = memo(function ParallaxCard({ project, index, onClick }) {
                         key={img}
                         src={img}
                         alt={project.title}
-                        className={`h-[85%] w-[85%] object-contain rounded-2xl absolute left-0 top-0 right-0 bottom-0 m-auto transition-all duration-700 will-change-transform will-change-opacity
-                          ${currentImageIdx === idx && imageLoaded ? 'opacity-100 z-10' : 'opacity-0 z-0'} group-hover:scale-105`}
+                        className={
+                          `object-contain rounded-2xl absolute left-0 top-0 right-0 bottom-0 m-auto transition-all duration-700 will-change-transform will-change-opacity ` +
+                          (isNaturrausch ? 'h-[95%] w-[95%] md:h-[98%] md:w-[98%] z-20 group-hover:scale-110' : 'h-[85%] w-[85%] z-10 group-hover:scale-105') +
+                          `${currentImageIdx === idx && imageLoaded ? ' opacity-100' : ' opacity-0'}`
+                        }
                         loading="lazy"
                         decoding="async"
                         onLoad={handleImageLoad}
@@ -172,7 +179,10 @@ const ParallaxCard = memo(function ParallaxCard({ project, index, onClick }) {
                         key={displayImage}
                         src={displayImage}
                         alt={project.title}
-                        className={`h-[85%] w-[85%] object-contain rounded-2xl transition-all duration-700 will-change-transform will-change-opacity opacity-100 z-10 group-hover:scale-105`}
+                        className={
+                          `object-contain rounded-2xl transition-all duration-700 will-change-transform will-change-opacity opacity-100 ` +
+                          (isNaturrausch ? 'h-[95%] w-[95%] md:h-[98%] md:w-[98%] z-20 group-hover:scale-110' : 'h-[85%] w-[85%] z-10 group-hover:scale-105')
+                        }
                         loading="lazy"
                         decoding="async"
                         onLoad={handleImageLoad}

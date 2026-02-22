@@ -12,36 +12,42 @@ const infoData = [
 
 const skills = [
   // Design & Creative
-  { name: 'Adobe Photoshop', description: 'Image editing, compositing, retouching', level: 95, category: 'Design & Creative' },
-  { name: 'Adobe InDesign', description: 'Layout design, editorial, publications', level: 92, category: 'Design & Creative' },
-  { name: 'Adobe Illustrator', description: 'Vector graphics, branding, icons', level: 90, category: 'Design & Creative' },
-  { name: 'Print & Packaging', description: 'Print-ready files & prepress production (flexographic printing & digital printing)', level: 88, category: 'Design & Creative' },
-  { name: 'Creating Presentations', description: 'Conferences, projects & explanation of solutions', level: 85, category: 'Design & Creative' },
-  { name: 'Photography', description: 'Weddings, Birthdays & Events', level: 58, category: 'Design & Creative' },
-  { name: 'Analog Films', description: 'Processing & Digitizing', level: 55, category: 'Design & Creative' },
+  { name: 'Adobe Photoshop', description: ' High-End Retouching & Post-Production', level: 90, category: 'Design & Creative' },
+  { name: 'Adobe InDesign', description: 'All sorts of printmedia', level: 80, category: 'Design & Creative' },
+  { name: 'Adobe Illustrator', description: 'Vector graphics, branding, icons', level: 80, category: 'Design & Creative' },
+  { name: 'Print & Packaging', description: 'Print-ready files & prepress production (flexographic printing & digital printing)', level: 90, category: 'Design & Creative' },
+  { name: 'Creating Presentations', description: 'Conferences, projects & explanation of solutions', level: 70, category: 'Design & Creative' },
+  { name: 'Photography', description: 'Weddings, Birthdays & Events', level: 60, category: 'Design & Creative' },
+  { name: 'Analog Films', description: 'Processing & Digitizing', level: 30, category: 'Design & Creative' },
   // 3D & Motion
   { name: 'Autodesk Maya', description: '3D modeling, animation & rendering', level: 80, category: '3D & Motion' },
   { name: 'Blender', description: '3D modeling, animation & rendering', level: 50, category: '3D & Motion' },
-  { name: 'After Effects', description: 'Motion graphics & animation', level: 70, category: '3D & Motion' },
-  { name: 'Adobe Premiere', description: 'Video editing & post-production', level: 68, category: '3D & Motion' },
+  { name: 'After Effects', description: 'Motion graphics & animation', level: 50, category: '3D & Motion' },
+  { name: 'Adobe Premiere', description: 'Video editingn', level: 40, category: '3D & Motion' },
   // UX & Research
-  { name: 'Prototyping', description: 'Interactive prototypes with Code (Vibe Coding) & Figma', level: 65, category: 'UX & Research' },
+  { name: 'Prototyping', description: 'Interactive prototypes with Code (Vibe Coding) & Figma', level: 60, category: 'UX & Research' },
   { name: 'User Research', description: 'User interviews, surveys, usability testing', level: 60, category: 'UX & Research' },
 ];
 
-// Group skills by thematic category for clustering
+// Group skills by thematic category for clustering, sorted by level descending
 const skillGroups = [
   {
     label: 'Design & Creative',
-    skills: skills.filter((s) => s.category === 'Design & Creative'),
+    skills: skills
+      .filter((s) => s.category === 'Design & Creative')
+      .sort((a, b) => b.level - a.level),
   },
   {
     label: '3D & Motion',
-    skills: skills.filter((s) => s.category === '3D & Motion'),
+    skills: skills
+      .filter((s) => s.category === '3D & Motion')
+      .sort((a, b) => b.level - a.level),
   },
   {
     label: 'UX & Research',
-    skills: skills.filter((s) => s.category === 'UX & Research'),
+    skills: skills
+      .filter((s) => s.category === 'UX & Research')
+      .sort((a, b) => b.level - a.level),
   },
 ];
 
